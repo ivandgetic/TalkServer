@@ -22,10 +22,14 @@ public class ServerThread implements Runnable {
         while (true) try {
             String readline = null;
             readline = in.readUTF();
-            System.out.println(readline);
-            for (Socket socket : Main.socketList) {
-                out = new DataOutputStream(socket.getOutputStream());
-                out.writeUTF(readline);
+            String[] separate = readline.split(":", 2);
+            if (separate[0].equals("Message")) {
+                Main.chats.add(separate[1]);
+                System.out.println(separate[1]);
+                for (Socket socket : Main.socketList) {
+                    out = new DataOutputStream(socket.getOutputStream());
+                    out.writeUTF(separate[1]);
+                }
             }
         } catch (SocketException e) {
             Main.socketList.remove(socket);
@@ -39,4 +43,5 @@ public class ServerThread implements Runnable {
             e.printStackTrace();
         }
     }
+
 }

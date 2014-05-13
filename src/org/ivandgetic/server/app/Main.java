@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Main {
     private static final int SOCKET_PORT = 50000;
     public static ArrayList<Socket> socketList = new ArrayList<Socket>();
-
+    public static ArrayList<String> chats=new ArrayList<String>();
     public static void main(String[] args) {
         new Thread(new Runnable() {
             @Override
